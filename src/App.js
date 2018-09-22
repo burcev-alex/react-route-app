@@ -16,15 +16,15 @@ class Article extends Component {
       }
 
     render() {
-        const {info} = this.props
-        const {visible} = this.state;
+        const { info } = this.props
+        const { visible } = this.state;
 
         return (
             <div className="article">
                 <p className="news__author">{info.author}</p>
                 <p className="news__text">{info.text}</p>
-                {!visible ? <a onClick={this.handleReadMoreClck} href="#" className='news__readmore'>Подробнее</a> : null }
-                {visible ? <p className="news__big-text">{info.bigText}</p> : null }
+                {!visible ? <a onClick={this.handleReadMoreClck} href="#" className='news__readmore'>Подробнее</a> : null}
+                {visible ? <p className="news__big-text">{info.bigText}</p> : null}
             </div>
         );
     }
@@ -159,10 +159,16 @@ class App extends Component {
         return null
     }
     componentDidMount() {
-        this.setState({ isLoading: true })
-        fetch('http://localhost:3002/data/newsData.json')
+        this.setState({ isLoading: true });
+
+        const myHeaders = new Headers({
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        });
+
+        fetch('http://localhost:3002/data/newsData.json', {headers: myHeaders})
         .then(response => {
-            return response.json()
+            return response.json();
         })
         .then(data => {
             setTimeout(() => {
