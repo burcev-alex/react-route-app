@@ -5,11 +5,13 @@ export class Page extends React.Component {
 
     onBtnClick = e => {
         const year = +e.currentTarget.innerText;
-        this.props.setYear(year);
+        this.props.getPhotos(year);
     }
 
     render() {
-        const {photos, year} = this.props;
+        const {photos, year, isFetching} = this.props;
+
+        const informationPhotos = !isFetching ? <p>У тебя {photos.length} фото</p> : 'Загрузка...';
 
         return (
         <div className="ib page">
@@ -24,7 +26,7 @@ export class Page extends React.Component {
                 <button className="btn" onClick={this.onBtnClick}>2011</button>
             </p>
             <h3>{year} год</h3>
-            <p>У тебя {photos.length} фото</p>
+            {informationPhotos}
         </div>
         )
     }
@@ -33,5 +35,6 @@ export class Page extends React.Component {
 Page.propTypes = {
     year: PropTypes.number.isRequired,
     photos: PropTypes.array.isRequired,
-    setYear: PropTypes.func.isRequired,
+    getPhotos: PropTypes.func.isRequired,
+    isFetching: PropTypes.bool.isRequired
 }

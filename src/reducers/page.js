@@ -1,14 +1,17 @@
-import {SET_YEAR} from '../actions/PageActions'
+import {PHOTOS_LOADING, PHOTOS_SUCCESS} from '../actions/PageActions'
 
 export const initialState = {
     year: 2018,
-    photos: []
+    photos: [],
+    isFetching: false,
 }
 
 export function pageReducer(state = initialState, action){
     switch (action.type){
-        case SET_YEAR :
-            return {...state, year: action.payload}
+        case PHOTOS_LOADING :
+            return {...state, year: action.payload, isFetching: true}
+         case PHOTOS_SUCCESS :
+            return {...state, photos: action.payload, isFetching: false}
         default:
             return state
     }
