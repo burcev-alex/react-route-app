@@ -15,7 +15,7 @@ class App extends Component {
             <h1 className="App-title">Мои фото</h1>
             </header>
             <User name={user.name} error={user.error} authorize={authorize} isFetching={page.isFetching}/>
-            <Page photos={page.photos} year={page.year} getPhotos={getPhotos} isFetching={page.isFetching} />
+            <Page photos={page.photos} year={page.year} error={page.error} getPhotos={getPhotos} isFetching={page.isFetching} />
         </div>
         )
     }
